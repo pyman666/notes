@@ -327,13 +327,13 @@ TODO
 
 ## Ctrl 
 
+- `Ctrl-r`  重做上次撤销的操作
 - `Ctrl-o`  跳回上一个跳转位置
 - `Ctrl-i`  往前跳回来
 - `Ctrl-u`  往上半页
 - `Ctrl-d`  往下半页
 - `Ctrl-b`  往上一页
 - `Ctrl-f`  往下一页
-- `Ctrl-r`  重做上次撤销的操作
 - `Ctrl-a`  增加数字
 - `Ctrl-x`  减少数字
     - `g<Ctrl-A>` 创建递增序列
