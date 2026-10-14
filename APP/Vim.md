@@ -221,13 +221,13 @@
 > 格式：`:[range] {excommand} [args]`
 
 - `:substitute`   替换 range 中的行
-    - `:s`        简写 
+    - `:s`        简写
 - `:delete`       删除 range 中的行
-    - `:d`        简写 
+    - `:d`        简写
 - `:yank`         复制 range 中的行到寄存器
     - `:y`        简写
 - `:move`         移动 range 中的行到指定行
-    - `:m`        简写 
+    - `:m`        简写
 - `:copy`         复制 range 中的行到指令行
     - `:t`        简写
 - `:print`        打印 range 中的行
@@ -236,6 +236,12 @@
 - `:put`          把寄存器内容放到当前行下面
     - `:pu`       简写
     - `:put!`     把寄存器内容放到当前行上面
+- `:read`         把文件内容读入当前文件
+    - `:r`        简写
+    - `:r a.txt`  把 a.txt 插入当前行下一行
+    - `:0r a.txt` 把 a.txt 插入文件开头
+    - `:$r a.txt` 把 a.txt 插入文件结尾
+    - `:r !命令`  把外部命令的输出读入当前文件
 
 - `:global`       对符合条件的行执行 Ex cmd
     - `:g`        简写
@@ -265,6 +271,8 @@
     - `:h`        简写 
 - `:source`       重新执行一个 Vim 配置/脚本文件
     - `:so`       简写
+- `:nohlsearch`   退出搜索高亮
+    - `noh`       简写
 - `:! {command}`  执行某条 command
 
 ### 历史
