@@ -1,18 +1,17 @@
-# 概览
-
 # 常用方法
+
 ```python
 from pathlib import Path
 
 # 获取路径
 Path('D:/demo/test.py')
-Path.cwd()  # 档期那工作路径
+Path.cwd()  # 当前工作路径
 Path.home()  # 用户home目录
 Path(__file__)  # 当前文件路径，cmd和pycharm结果不同
 
 # 文件方法
 file = Path('/test.py')
-file..resolve()  # 获取绝对路径 D:/demo/test.py
+file.resolve()  # 获取绝对路径 D:/demo/test.py
 file.stat()  # 文件属性，如文件大小，创建时间，修改时间等
 file.stat().st_size
 file.stat().st_atime
@@ -43,9 +42,11 @@ path.is_file()  # 是否文件
 path.is_dir()  # 是否路径
 path.exists  # 是否存在
 ```
+
 # 文件操作
 
 对文件进行操作最好还是用 shutil 模块
+
 ```python
 # 文件操作
 file.touch(exist_ok=True)  # 创建文件
@@ -58,6 +59,7 @@ with open(file) as f:  # 打开文件
     pass
 with file.open() as f:  # 打开文件
     pass
+
 file.read_text()  # 读取文本，已封装，无需重复去打开文件和管理文件的关闭了
 file.read_bytes()  # 读取 bytes
 file.write_text()  # 写入文本，w模式

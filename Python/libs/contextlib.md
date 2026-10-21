@@ -1,8 +1,9 @@
-# **contextmanager**
+# contextmanager
 
-`contextmanager`是一个装饰器**，**被装饰的函数在被调用时，必须返回一个生成器。
+`contextmanager`是一个装饰器，被装饰的函数在被调用时，必须返回一个生成器。
 
 > 生成器`yield`的值就是`with`语句`as`后面的变量，`yield`前的代码相当于`enter`函数，`yield`后的代码相当于`exit`函数（存疑？）
+
 ```python
 from contextlib import contextmanager
 
@@ -23,9 +24,11 @@ try:
 except:
     print("error")
 ```
+
 # closing
 
 将有`close`方法的对象快速变成上下文管理器，并把对象变为`as`后的变量。其等价于
+
 ```python
 @contextmanager
 def closing(thing):
@@ -34,7 +37,9 @@ def closing(thing):
     finally:
         thing.close()
 ```
+
 具体用法
+
 ```python
 from contextlib import closing
 

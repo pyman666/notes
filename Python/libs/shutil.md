@@ -1,5 +1,6 @@
 
 `shutil`可以简单地理解为sh + util，shell工具的意思。shutil模块是对os模块的补充，主要针对文件的拷贝、删除、移动、压缩和解压操作。
+
 ```python
 shutil.copyfileobj(fsrc, fdst[, length])  # 将文件内容拷贝到另一个文件中
 
