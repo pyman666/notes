@@ -7,18 +7,15 @@
 
 切换：
 
-- `Esc`  normal
-- `i`    insert
-- `v`    visual
-    - `Ctrl-v` 或 `Ctrl-q` 矩形选区
-
-## insert 插入
-
-- `i`  insert
-    - `I` 跳到行首插入
-- `a`  append
-    - `A` 跳到行尾插入
-
+- `Esc`   normal
+- `i`     insert
+    - `I`      跳到行首插入
+    - `a`      append
+    - `A`      跳到行尾插入
+- `v`     visual
+    - `V`      整行选中
+    - `Ctrl-v` 矩形选区
+    - `Ctrl-q` 矩形选区（windows）
 
 # Motion 移动
 
@@ -291,7 +288,7 @@
 
 - `:10`           跳到第10行
 - `:10d`          删除第10行
-- `:10,20y  a`    复制10~20行到 a 寄存器
+- `:10,20y a`     复制10~20行到 a 寄存器
 - `:10m20`        把第10行移动到第20行后面
 - `:10,20m5`      把10~20行移动到第5行后面
 
