@@ -1,29 +1,47 @@
+# flask
 
-- [Flask](#flask)
-- [路由](#路由)
-- [配置](#配置)
-- [请求扩展](#请求扩展)
-- [Blueprint](#blueprint)
-- [request](#request)
-- [session](#session)
-- [g](#g)
-- [Response](#response)
+- [部署](#部署)
+- [Flask](#Flask)
+  - [路由](#路由)
+  - [配置](#配置)
+  - [请求扩展](#请求扩展)
+  - [Blueprint](#Blueprint)
+- [接口](#接口)
+  - [request](#request)
+  - [session](#session)
+  - [g](#g)
+  - [Response](#Response)
+- [其他](#其他)
   - [signal](#signal)
   - [flash](#flash)
   - [render\_template](#render_template)
   - [redirect](#redirect)
   - [jsonify](#jsonify)
   - [url\_for](#url_for)
-- [flask-session](#flask-session)
-- [wtforms](#wtforms)
-- [变量](#变量)
-- [语句](#语句)
-- [过滤器](#过滤器)
-- [继承](#继承)
+- [扩展](#扩展)
+  - [flask-session](#flask-session)
+  - [wtforms](#wtforms)
+- [模板语言](#模板语言)
+  - [变量](#变量)
+  - [语句](#语句)
+  - [过滤器](#过滤器)
+  - [继承](#继承)
 
-# Flask
+## 部署
 
-## 路由
+生产模式部署：
+
+- 部署 Flask 应用时，通常都是使用一种 WSGI 应用服务器搭配 Nginx 作为反向代理；
+- 常用的 WSG1 服务器：gunicorn、uwsgi；
+- 安装 Nginx: `yum install nginx`（红帽系列Linux发行版上的指令）；
+- 安装 Gunicorn: `pip install gunicorn`；
+- 启动 Gunicorn: `gunicorn -b 127.0.0.1:8080-D my_app:app`；
+- 编辑 Nginx 配置文件 `vim -ziginx/nginx.conf`；
+- 启动 Nginx : `/usr/sbin/nginx`
+
+## Flask
+
+### 路由
 
 `@app.route('/index/<int:arg>', methods=['GET'], endpoint='ind')`
 
@@ -47,7 +65,7 @@
 
 `subdomain`：允许访问的域名
 
-## 配置
+### 配置
 
 - 默认值：
 
@@ -68,6 +86,7 @@
 - 类配置
 
 `app.config.from_object(setting.Config)`
+
 ```python
 class Config:
     DEBUG = False
@@ -76,6 +95,7 @@ class Config:
 class TestConfig(Config):
     DEBUG = True
 ```
+
 - 其他配置
 
 `app.config.from_json("config.json")`：json文件
@@ -84,7 +104,7 @@ class TestConfig(Config):
 
 `app.config.from_envvar("环境变量名称")`：环境变量
 
-## 请求扩展
+### 请求扩展
 
 类似django中间件
 
@@ -120,11 +140,11 @@ class TestConfig(Config):
 
 todo
 
-## Blueprint
+### Blueprint
 
 没有蓝图之前分文件app要在文件之间导来导去，有了蓝图之后可以分文件分app，请求扩展啥的也都有，只是在当前蓝图对象管理下的有效。
 
-`user = Blueprint(“user”, __name__)`
+`user = Blueprint("user", __name__)`
 
 参数：
 
@@ -141,6 +161,7 @@ todo
 `cli_group`：控制flask命令下的组名（蓝图有一个cli组来注册嵌套的CLI命令）
 
 其他与Flask参数基本相同。
+
 ```python
 """app.py"""
 
@@ -167,11 +188,12 @@ def login():
 def modify_password():
     return 'modify_password'
 ```
+
 ---
 
-# 接口
+## 接口
 
-## request
+### request
 
 属性：
 
@@ -205,7 +227,7 @@ def modify_password():
 
 `request.files`：上传的文件
 
-## session
+### session
 
 除了请求对象还有session对象（app.session\_interface对象），他允许在不同请求间存储用户的信息，他是在cookie的基础上实现的，并对cookie进行密钥签名。
 
@@ -223,13 +245,13 @@ token：存放在客户端，通过算法来校验
 
 删除：session.pop("username", None)
 
-## g
+### g
 
 全局变量，在当次请求中一直有效，在当次请求中放值取值。为了不让在请求中往request中放东西。
 
 session跨request，只要session还未失效，不同request请求都会获得同一个session。g对象不需要考虑过期时间，每请求一次，g对象就改变一次或者重新赋值一次。
 
-## Response
+### Response
 
 flask.wrapper.Response
 
@@ -243,21 +265,23 @@ res.delete\_cookie("key")
 
 res.headers["xxx"] = "xxx"
 
-# 其他
+## 其他
 
 ### signal
 
 flask中的信号基于blinker，让开发者可以在请求过程中定制一些用户行为。当程序执行到某个位置，自动触发某些操作，异步执行。
+
 ```python
 from flask import Flask, signals
 
 app = Flask(__name__)
 
-def call(*args, ""kwargs):
+def call(*args, **kwargs):
     print("触发信号")
 
 signals.request_started.connect(call)
 ```
+
 ### flash
 
 闪现，闪现系统使得在一个请求结束的时候记录一个信息供下次获取。flask闪现是基于flask内置的session的，利用浏览器的session缓存闪现信息，所以必须设置secret\_key。
@@ -288,9 +312,9 @@ signals.request_started.connect(call)
 
 ---
 
-# 扩展
+## 扩展
 
-## flask-session
+### flask-session
 
 替换flask内置session，将默认保存的签名cookie中的值保存到redis、数据库、file等
 
@@ -339,6 +363,7 @@ cookie应该和httponly标志一起设置，默认为True，一般采用默认�
 - `SESSION_COOKIE_SECURE`
 
 cookie是否和安全标志一起设置，默认为False，一般采用默认。
+
 ```python
 from flask import Flask
 import redis
@@ -347,24 +372,25 @@ from flask_session import Session, RedisSessionInterface
 app = Flask(__name__)
 conn = redis.StrictRedis(host="127.0.0.1", port=6390, db=4)
 
-# 法一
+## 法一
 app.session_interface = RedisSessionInterface(conn, key_prefix="hz")
 
-# 法二
+## 法二
 app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_REDIS"] = conn
 app.config["SESSION_KEY_PREFIX"] = "hn"
 Session(app)
 ```
-## wtforms
+
+### wtforms
 
 功能：校验数据、渲染标签
 
-# 模板语言
+## 模板语言
 
 flask默认使用jinjia2模版引擎，支持函数直接调用
 
-## 变量
+### 变量
 
 - 值
 
@@ -378,7 +404,7 @@ flask默认使用jinjia2模版引擎，支持函数直接调用
 
 `{{d.key}}`、`{{d['key']}}`、`{{d.get('key')}}`
 
-## 语句
+### 语句
 
 - 注释
 
@@ -400,7 +426,7 @@ flask默认使用jinjia2模版引擎，支持函数直接调用
 
 `{% endfor %}`
 
-## 过滤器
+### 过滤器
 
 - TODO
 
@@ -412,4 +438,4 @@ flask默认使用jinjia2模版引擎，支持函数直接调用
 
 后端：`Markup()`
 
-## 继承
+### 继承

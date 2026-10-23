@@ -1,3 +1,5 @@
+# seaborn
+
 - [relplot](#relplot)
 - [scatterplot](#scatterplot)
 - [lineplot](#lineplot)
@@ -18,7 +20,6 @@
 - [residplot](#residplot)
 - [heatmap](#heatmap)
 - [clustermap](#clustermap)
-
 
 ## relplot
 

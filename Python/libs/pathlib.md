@@ -1,4 +1,9 @@
-# 常用方法
+# pathlib
+
+[常用方法](#常用方法)
+[文件操作](#文件操作)
+
+## 常用方法
 
 ```python
 from pathlib import Path
@@ -43,9 +48,9 @@ path.is_dir()  # 是否路径
 path.exists  # 是否存在
 ```
 
-# 文件操作
+## 文件操作
 
-对文件进行操作最好还是用 shutil 模块
+**对文件进行操作最好还是用 shutil 模块**
 
 ```python
 # 文件操作
@@ -66,7 +71,7 @@ file.write_text()  # 写入文本，w模式
 file.write_bytes()  # 写入bytes，w模式
 
 # 移动文件
-txth = Path('archive/demo.txt')
+txt = Path('archive/demo.txt')
 res = txt.replace('new_demo.txt')  # 把 archive 目录下的 demo.txt 文件移动到当前工作目录，并重命名为 new_demo.txt
 
 # 重命名文件
