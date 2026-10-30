@@ -9,7 +9,7 @@
 
 - `Esc`   normal
 - `i`     insert
-    - `I`      跳到行首插入
+    - `I`      跳到当前行第一个非空字符插入
     - `a`      append
     - `A`      跳到行尾插入
 - `v`     visual
